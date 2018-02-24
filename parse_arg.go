@@ -11,8 +11,8 @@ func usage() {
 	fmt.Println("command:")
 }
 
-func parseArg() {
-	fileName := flag.String("file", "config.yaml", "file name")
+func parseArg() (fileName string, commands string, isReastart bool){
+	fileName := flag.String("file", "config.yml", "file name")
 	commands := flag.String("cmd", "", "exec commands")
 	isRestart := flag.Bool("restart", false, "restart flag")
 	flag.Parse()
@@ -22,7 +22,5 @@ func parseArg() {
 		flag.PrintDefaults()
 		os.Exit(1)
 	}
-	fmt.Println("%s", fileName)
-	fmt.Println("%s", commands)
-	fmt.Println("%v", isRestart)
+	return
 }
