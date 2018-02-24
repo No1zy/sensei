@@ -5,6 +5,7 @@ import (
 )
 
 func main() {
+	parseArg()
 	monitor, _ := monitor.Create("sample.yml")
 	monitor.Run()
 }
