@@ -1,11 +1,16 @@
 package main
 
 import (
-	monitor "github.com/No1zy/proc-monitor/monitor"
+	"github.com/No1zy/sensei/monitor"
+	"log"
 )
 
 func main() {
-	parseArg()
-	monitor, _ := monitor.Create("sample.yml")
-	monitor.Run()
+	fileName, command, isRestart := parseArg()
+
+	m, err := monitor.Create(fileName, command, isRestart)
+	if err != nil {
+		log.Fatal(err)
+	}
+	m.Run()
 }
