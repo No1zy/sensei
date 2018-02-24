@@ -12,7 +12,7 @@ func usage() {
 }
 
 func parseArg() (fileName string, commands string, isReastart bool){
-	fileName := flag.String("file", "config.yml", "file name")
+	fileName := flag.String("file", "", "file name")
 	commands := flag.String("cmd", "", "exec commands")
 	isRestart := flag.Bool("restart", false, "restart flag")
 	flag.Parse()
