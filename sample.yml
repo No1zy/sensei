@@ -1,0 +1,6 @@
+config:
+    name: 'test'
+    command: 'ls'
+    is_restart: false
+    args: ["-la"]
+   
