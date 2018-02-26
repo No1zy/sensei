@@ -1,7 +1,6 @@
 package monitor
 
 import (
-	//"errors"
 	"bufio"
 	"fmt"
 	"github.com/kr/pty"
@@ -59,7 +58,6 @@ func (monitor *Monitor) Run() {
 			f, err := pty.Start(cmd)
 			fmt.Println("======== Process start ========")
 
-			//writeLog("error.log", e)
 			writeLog("output.log", f)
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "exec error. please confirm commads")
@@ -93,7 +91,7 @@ func (monitor *Monitor) Printf(message string, a ...interface{}) {
 	}
 }
 
-func Create(configFile string, command string, isRestart bool) (monitor *Monitor, err error) {
+func Create(configFile string, command []string, isRestart bool) (monitor *Monitor, err error) {
 	if configFile != "" {
 		data, err := ioutil.ReadFile(configFile)
 		if err != nil {
@@ -102,7 +100,10 @@ func Create(configFile string, command string, isRestart bool) (monitor *Monitor
 		yaml.Unmarshal(data, &monitor)
 	} else {
 		monitor = &Monitor{}
-		monitor.Config.Command = command
+		monitor.Config.Command = command[0]
+		if len(command) > 1 {
+			monitor.Config.Args = command[1:]
+		}
 		monitor.Config.IsRestart = isRestart
 	}
 	return

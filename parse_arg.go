@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strings"
 )
 
 func usage() {
@@ -11,7 +12,7 @@ func usage() {
 	fmt.Println("command:")
 }
 
-func parseArg() (string, string, bool) {
+func parseArg() (string, []string, bool) {
 	fileName  := flag.String("file", "", "file name")
 	command   := flag.String("cmd", "", "exec commands")
 	isRestart := flag.Bool("restart", false, "restart flag")
@@ -25,5 +26,6 @@ func parseArg() (string, string, bool) {
 	if *fileName == "" && *command == "" {
 		fmt.Fprintln(os.Stderr, "filename or command require input")
 	}
-	return *fileName, *command, *isRestart
+	fields := strings.Fields(*command)
+	return *fileName, fields, *isRestart
 }

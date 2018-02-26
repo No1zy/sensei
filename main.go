@@ -8,7 +8,7 @@ import (
 func main() {
 	fileName, command, isRestart := parseArg()
 
-	m, err := monitor.Create(fileName, command, isRestart)
+	m, err := monitor.Create(fileName, command[:], isRestart)
 	if err != nil {
 		log.Fatal(err)
 	}
